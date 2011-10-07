@@ -16,43 +16,43 @@ Features
 Usage
 --------
 
-[cisco@localhost montarpy]$ python montar.py -h
-Usage: montar.py [options] [ips]
-        If the script is run without arguments, the saved ips will be mounted.
-        By default, all ips mounted by the script are saved.
-        Options:
-            -l: lists saved ips and exits
-            -n: mount but don't save ips
-            -e: edit saved configuration
-            -lm: list saved ips and ask what ip to mount
-            -u:  lists ips and ask what ip to unmount.
-        Valid ip sintaxis:
-            <user>@<ip>:<remote mount point>|<local mount point>
-            where:
-                <user> is the user (default is root)
-                <ip> ip, 192.168.1.1 will be used as default.
-                    Instead of passing the full ip, only the lasts digits can be passed.
-                    Eg: if 69 is passed, 192.168.1.69 will be used
-                        if 4.67 is passed, 192.168.4.67 will be used
-                        if 160.3.45 is passed, 192.160.3.45 will be used
-                        if 200.40.32.4 is passed 200.40.32.4 will be used
-            <remove mount point> like in sshfs, / will be used as default
-            <local mount point> local folder where to mount.
-                %%ip%%  will be replaced by the ip.
-                Default local mount point:  ~/ip_%%ip%%
-            All [options] are optional.
-        Examples:
-            python montar.py 69 (192.168.1.69 will mounted in ~/ip_69 as root)
-            python montar.py 69 89 (192.168.1.69 and 192.168.1.89 will be mounted in ~/ip_69 ~/ip_89 as root)
-            python montar.py (saved ips will be mounted)
-            python montar.py 69 -n (192.168.1.69 will be mounted in ~/ip_69 as root without saving the ip)
-            python montar.py pepe@4.69 (192.168.4.69 will be mounted in ~/ip_69 as pepe)
-            python montar.py 4.69:/asd|~/miFolder/%%ip%% (/asd folder from 192.168.4.69 will be mounted in  ~/miFolder/4_69 as root)
-            python montar.py -l (will list saved ips)
-            python mountar.py -e (will list saved ips for erasing)
-        Config file: ~/.montadorsshfs
-        
-[cisco@localhost montarpy]$ 
+	[cisco@localhost montarpy]$ python montar.py -h
+	Usage: montar.py [options] [ips]
+			If the script is run without arguments, the saved ips will be mounted.
+			By default, all ips mounted by the script are saved.
+			Options:
+				-l: lists saved ips and exits
+				-n: mount but don't save ips
+				-e: edit saved configuration
+				-lm: list saved ips and ask what ip to mount
+				-u:  lists ips and ask what ip to unmount.
+			Valid ip sintaxis:
+				<user>@<ip>:<remote mount point>|<local mount point>
+				where:
+					<user> is the user (default is root)
+					<ip> ip, 192.168.1.1 will be used as default.
+						Instead of passing the full ip, only the lasts digits can be passed.
+						Eg: if 69 is passed, 192.168.1.69 will be used
+							if 4.67 is passed, 192.168.4.67 will be used
+							if 160.3.45 is passed, 192.160.3.45 will be used
+							if 200.40.32.4 is passed 200.40.32.4 will be used
+				<remove mount point> like in sshfs, / will be used as default
+				<local mount point> local folder where to mount.
+					%%ip%%  will be replaced by the ip.
+					Default local mount point:  ~/ip_%%ip%%
+				All [options] are optional.
+			Examples:
+				python montar.py 69 (192.168.1.69 will mounted in ~/ip_69 as root)
+				python montar.py 69 89 (192.168.1.69 and 192.168.1.89 will be mounted in ~/ip_69 ~/ip_89 as root)
+				python montar.py (saved ips will be mounted)
+				python montar.py 69 -n (192.168.1.69 will be mounted in ~/ip_69 as root without saving the ip)
+				python montar.py pepe@4.69 (192.168.4.69 will be mounted in ~/ip_69 as pepe)
+				python montar.py 4.69:/asd|~/miFolder/%%ip%% (/asd folder from 192.168.4.69 will be mounted in  ~/miFolder/4_69 as root)
+				python montar.py -l (will list saved ips)
+				python mountar.py -e (will list saved ips for erasing)
+			Config file: ~/.montadorsshfs
+			
+	[cisco@localhost montarpy]$ 
 
 
 Requirements
