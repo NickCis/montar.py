@@ -15,7 +15,8 @@ DEFAULTREMOTEPATH = '/'
 DEFAULTUSER = "root"
 DEFAULTIP =  "192.168.1.1".split('.')
 EXESTRING = "sshfs %s@%s:%s %s"
-UMOUNTSTRING = "sudo umount %s"
+#UMOUNTSTRING = "sudo umount %s"
+UMOUNTSTRING = "fusermount -u %s"
 CONFIGPATH = os.path.expanduser("~/.montadorsshfs")
 
 def parseArgString(argstring):
