@@ -23,7 +23,7 @@ def parseArgString(argstring):
     '''Parses the syntax of the ips (see montar.py -h for further details) '''
     user = argstring.split('@')[0] if (argstring.find('@') != -1) else \
                                                                 DEFAULTUSER
-    ipString = argstring[0 if (argstring.find('@') == -1) else argstring.find('@'): \
+    ipString = argstring[0 if (argstring.find('@') == -1) else argstring.find('@') +1: \
                    len(argstring) if (argstring.find(':') == -1) else \
                    argstring.find(':')]
     ip = ipString.split('.')
@@ -44,10 +44,10 @@ def parseArgString(argstring):
     else:
         ip =  "%s.%s.%s.%s" % tuple(DEFAULTIP)
     remotePath = DEFAULTREMOTEPATH if (argstring.find(':') == -1) else \
-            argstring[argstring.find(':'): argstring.find('|') if \
+            argstring[argstring.find(':')+1: argstring.find('|') if \
                       (argstring.find('|') != -1) else len(argstring)]
     path = DEFAULTPATH  if (argstring.find('|') == -1 ) else \
-            argstring[argstring.find('|'):]
+            argstring[argstring.find('|')+1:]
     path =os.path.expanduser(path.replace('%%ip%%', ipString.replace('.','_')))
     return (user, ip, remotePath, path)
 def mountList(mlist):
@@ -57,6 +57,7 @@ def mountList(mlist):
         user, ip, remotepath, path = parseArgString(mlist[i])
         #print path
         #print os.path.exists(path)
+        print path
         if not os.path.exists(path):
             os.mkdir(path)
         #args = shlex.split(EXESTRING % (DEFAULTUSER, ip, remotepath, path))
@@ -131,7 +132,7 @@ if __name__ == '__main__':
             python montar.py (saved ips will be mounted)
             python montar.py 69 -n (192.168.1.69 will be mounted in ~/ip_69 as root without saving the ip)
             python montar.py pepe@4.69 (192.168.4.69 will be mounted in ~/ip_69 as pepe)
-            python montar.py 4.69:/asd|~/miFolder/%%ip%% (/asd folder from 192.168.4.69 will be mounted in  ~/miFolder/4_69 as root)
+            python montar.py 4.69:/asd\|~/miFolder/%%ip%% (/asd folder from 192.168.4.69 will be mounted in  ~/miFolder/4_69 as root)
             python montar.py -l (will list saved ips)
             python mountar.py -e (will list saved ips for erasing)
         Config file: ~/.montadorsshfs
@@ -170,4 +171,5 @@ if __name__ == '__main__':
             saveList(lst)
     else:
         mountList(loadList())
+
     exit(0)
