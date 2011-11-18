@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python2
 
 import os
 import sys
@@ -53,13 +53,17 @@ def parseArgString(argstring):
 def mountList(mlist):
     '''Mounts the specified ips (mlists ir an array of the ips to mount)'''
     for i in range(0, len(mlist)):
-        #print sys.argv[i]
         user, ip, remotepath, path = parseArgString(mlist[i])
-        #print path
-        #print os.path.exists(path)
-        print path
+        print "Mounting %s in %s ..." % (ip ,path)
         if not os.path.exists(path):
-            os.mkdir(path)
+            try:
+                os.mkdir(path)
+            except OSError:
+                print 'Error trying to create the folder'
+                if os.path.ismount(path):
+                    print 'You have something mounted in the folder!'
+                print 'Exiting...'
+                exit(0)
         #args = shlex.split(EXESTRING % (DEFAULTUSER, ip, remotepath, path))
         args = shlex.split(EXESTRING % (user, ip, remotepath, path))
         #print args
