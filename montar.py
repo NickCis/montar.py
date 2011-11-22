@@ -24,8 +24,9 @@ def parseArgString(argstring):
     user = argstring.split('@')[0] if (argstring.find('@') != -1) else \
                                                                 DEFAULTUSER
     ipString = argstring[0 if (argstring.find('@') == -1) else argstring.find('@') +1: \
-                   len(argstring) if (argstring.find(':') == -1) else \
-                   argstring.find(':')]
+                    len(argstring) if (argstring.find('|') == -1) else (argstring.find('|') if (argstring.find(':') == -1) else argstring.fin(':'))]
+#            len(argstring) if (argstring.find(':') == -1) else \
+#                   argstring.find(':')]
     ip = ipString.split('.')
     if (len(ip) == 4 ):
         ip =  "%s.%s.%s.%s" % tuple(ip)
